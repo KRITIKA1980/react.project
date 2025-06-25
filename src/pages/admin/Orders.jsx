@@ -11,36 +11,28 @@ const Orders = () => {
     switch(status) {
       case 'Delivered': return 'bg-green-100 text-green-800';
       case 'Shipped': return 'bg-blue-100 text-blue-800';
-      case 'Processing': return 'bg-yellow-100 text-yellow-800';
+      case 'Processing': return 'bg-orange-100 text-orange-800';
       case 'Pending': return 'bg-gray-100 text-gray-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-white">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-2xl font-bold" style={{ color: '#111827' }}>Order Management</h1>
-          <p className="text-sm" style={{ color: '#6B7280' }}>View and manage all customer orders</p>
+          <h1 className="text-2xl font-bold text-gray-900">Order Management</h1>
+          <p className="text-sm text-gray-500">View and manage all customer orders</p>
         </div>
         <div className="flex space-x-4">
           <button 
-            className="px-4 py-2 rounded-md text-sm font-medium"
-            style={{ 
-              backgroundColor: '#F3F4F6',
-              color: '#111827'
-            }}
+            className="px-4 py-2 rounded-md text-sm font-medium bg-gray-100 text-gray-900 hover:bg-gray-200 transition-colors"
           >
             Export Orders
           </button>
           <button 
-            className="px-4 py-2 rounded-md text-sm font-medium"
-            style={{ 
-              backgroundColor: '#4F46E5',
-              color: 'white'
-            }}
+            className="px-4 py-2 rounded-md text-sm font-medium bg-orange-500 text-white hover:bg-orange-600 transition-colors"
           >
             Create New Order
           </button>
@@ -48,8 +40,8 @@ const Orders = () => {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-4 mb-6 p-4 rounded-lg" style={{ backgroundColor: '#F3F4F6' }}>
-        <select className="px-3 py-2 rounded-md text-sm" style={{ border: '1px solid #E5E7EB' }}>
+      <div className="flex flex-wrap gap-4 mb-6 p-4 rounded-lg bg-gray-100">
+        <select className="px-3 py-2 rounded-md text-sm border border-gray-300 bg-white">
           <option>All Statuses</option>
           <option>Pending</option>
           <option>Processing</option>
@@ -58,53 +50,49 @@ const Orders = () => {
         </select>
         <input 
           type="date" 
-          className="px-3 py-2 rounded-md text-sm" 
-          style={{ border: '1px solid #E5E7EB' }}
+          className="px-3 py-2 rounded-md text-sm border border-gray-300 bg-white"
         />
         <input 
           type="text" 
           placeholder="Search orders..." 
-          className="px-3 py-2 rounded-md text-sm" 
-          style={{ border: '1px solid #E5E7EB' }}
+          className="px-3 py-2 rounded-md text-sm border border-gray-300 bg-white"
         />
       </div>
 
       {/* Orders Table */}
-      <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead>
+            <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: '#6B7280' }}>Order ID</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: '#6B7280' }}>Customer</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: '#6B7280' }}>Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: '#6B7280' }}>Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: '#6B7280' }}>Total</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: '#6B7280' }}>Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {orders.map((order) => (
-                <tr key={order.id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium" style={{ color: '#111827' }}>{order.id}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm" style={{ color: '#111827' }}>{order.customer}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm" style={{ color: '#6B7280' }}>{order.date}</td>
+                <tr key={order.id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{order.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{order.customer}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.date}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(order.status)}`}>
                       {order.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium" style={{ color: '#111827' }}>{order.total}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{order.total}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <button 
-                      className="text-sm mr-2"
-                      style={{ color: '#4F46E5' }}
+                      className="text-sm mr-3 text-orange-500 hover:text-orange-700"
                     >
                       View
                     </button>
                     <button 
-                      className="text-sm"
-                      style={{ color: '#0EA5E9' }}
+                      className="text-sm text-gray-600 hover:text-gray-900"
                     >
                       Edit
                     </button>
@@ -118,13 +106,13 @@ const Orders = () => {
 
       {/* Pagination */}
       <div className="flex justify-between items-center mt-6">
-        <div className="text-sm" style={{ color: '#6B7280' }}>
+        <div className="text-sm text-gray-500">
           Showing 1 to 4 of 4 orders
         </div>
         <div className="flex space-x-2">
-          <button className="px-3 py-1 rounded-md text-sm" style={{ backgroundColor: '#F3F4F6', color: '#111827' }}>Previous</button>
-          <button className="px-3 py-1 rounded-md text-sm" style={{ backgroundColor: '#4F46E5', color: 'white' }}>1</button>
-          <button className="px-3 py-1 rounded-md text-sm" style={{ backgroundColor: '#F3F4F6', color: '#111827' }}>Next</button>
+          <button className="px-3 py-1 rounded-md text-sm bg-gray-100 text-gray-900 hover:bg-gray-200">Previous</button>
+          <button className="px-3 py-1 rounded-md text-sm bg-orange-500 text-white hover:bg-orange-600">1</button>
+          <button className="px-3 py-1 rounded-md text-sm bg-gray-100 text-gray-900 hover:bg-gray-200">Next</button>
         </div>
       </div>
     </div>
